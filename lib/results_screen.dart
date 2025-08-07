@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quiz/questions_summary.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'data/questions.dart';
@@ -23,6 +24,12 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final summaryData = getSummaryData();
+    final numTotalQuestions = questions.length;
+    final correctQuestions = summaryData.where((data) {
+      return (data["user_answer"] == data["correct_answer"]);
+    }).length;
+
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 40, horizontal: 40),
@@ -32,7 +39,7 @@ class ResultsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'You answered X out of Y questions correctly!',
+              'You answered $correctQuestions out of $numTotalQuestions questions correctly!',
               style: GoogleFonts.lato(
                 color: Colors.white,
                 fontSize: 24,
@@ -41,7 +48,7 @@ class ResultsScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 30),
-            Text("List of answers and questions...."),
+            QuestionsSummary(summaryData: summaryData),
             SizedBox(height: 30),
             TextButton(
               onPressed: () {},
