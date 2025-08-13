@@ -11,7 +11,11 @@ class ResultsScreen extends StatelessWidget {
 
   final void Function() onRestart;
 
-  List<Map<String, Object>> getSummaryData() {
+  // get summaryData
+  // is used to denote summaryData is a function
+  // that is a property of the class
+  // we can use it like member variable call
+  List<Map<String, Object>> get summaryData {
     final List<Map<String, Object>> summary = [];
     for (var i = 0; i < chosenAnswers.length; i++) {
       summary.add({
@@ -26,12 +30,15 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final summaryData = getSummaryData();
     final numTotalQuestions = questions.length;
     final correctQuestions = summaryData.where((data) {
       return (data["user_answer"] == data["correct_answer"]);
     }).length;
 
+    // arrow function (optional)
+    // summaryData
+    //     .where((data) => (data["user_answer"] == data["correct_answer"]))
+    //     .length;
     return Center(
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 40, horizontal: 40),

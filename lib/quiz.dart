@@ -16,7 +16,7 @@ class Quiz extends StatefulWidget {
     return _QuizState();
   }
 }
-
+// leading _ means private
 class _QuizState extends State<Quiz> {
   var activeScreen = "start-screen";
   final List<String> selectedAnswers = [];
